@@ -1,0 +1,39 @@
+.header-section {
+    padding: 30px 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo-section img {
+    width: 140px;
+}
+
+.main-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-menu ul li a {
+    padding: 12px 30px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+}
+
+.main-menu ul li a:hover {
+    background-color: #F9A51A;
+}
+
+.main-menu ul li a.login {
+    background-color: #F9A51A;
+}

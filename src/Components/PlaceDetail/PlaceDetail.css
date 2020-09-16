@@ -1,0 +1,54 @@
+.booking-section {
+    background-color: white;
+    border-radius: 4px;
+    padding: 30px;
+    overflow: hidden;
+}
+
+
+.booking-section input {
+    padding: 13px 15px;
+    border-radius: 4px;
+    width: 100%;
+    margin: 5px 0;
+    background-color: gainsboro;
+}
+
+.booking-section .left-date {
+    width: 48%;
+    float: left;
+    margin-right: 4%;
+}
+
+.booking-section .right-date {
+    width: 48%;
+    overflow: hidden;
+}
+
+.booking-section select {
+    width: 100%;
+    padding: 15px 0;
+    border-radius: 4px;
+    background-color: gainsboro;
+    margin: 5px 0;
+}
+
+
+.booking-section input[type="submit"] {
+    margin-top: 20px;
+    background-color: #F9A51A;
+    border: 2px solid #F9A51A;
+}
+
+.place-details-section {
+    padding: 140px 0;
+    background-image: url("../../travel-guru-resources//Image/Rectangle\ 1.png");
+    background-size: 100% 100%;
+}
+
+.details h1,
+.details p {
+    color: white;
+}
+
+

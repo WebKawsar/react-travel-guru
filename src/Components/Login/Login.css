@@ -1,0 +1,126 @@
+
+
+.login-section {
+    margin-bottom: 50px;
+}
+
+.login-system {
+    margin-top: 25px;
+}
+
+
+.login-form {
+    border: 2px solid lightgray;
+    padding: 50px;
+    margin-bottom: 30px;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px 0;
+    margin: 20px 0;
+    border: none;
+    border-bottom: 2px solid lightgray;
+}
+
+.login-form input[type="submit"] {
+    background-color: #F9A51A;
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.login-form input[type="email"]:focus {
+    border: none;
+    border-bottom: 2px solid lightgray;
+}
+
+.login-form input[type="password"]:focus {
+    border: none;
+    border-bottom: 1px solid lightgray;
+}
+
+.inine-input {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.login-form label {
+    cursor: pointer;
+}
+
+.login-form span a {
+    color: #F9A51A;
+    text-decoration: underline;
+}
+
+.login-form .forgot-pass {
+    color: #F9A51A;
+    text-decoration: underline;
+}
+
+
+/********/
+
+.icon {
+    width: 40px;
+    padding: 3px;
+}
+
+.facebook,
+.google {
+    display: flex;
+    align-items: center;
+    border: 2px solid lightgrey;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+.facebook {
+    margin: 20px 0 12px ;
+}
+
+.facebook p,
+.google p {
+    margin: 0;
+    width: 200px;
+    margin: auto;
+}
+
+.alternate-login-system {
+    width: 70%;
+    text-align: center;
+    margin: auto;
+}
+
+.or-section {
+    overflow: hidden;
+}
+
+.or-section hr:first-child {
+    border: 1px solid lightgrey;
+    width: 40%;
+    float: left;
+}
+
+
+.or-section hr:last-child {
+    border: 1px solid lightgrey;
+    width: 50%;
+    float: right;
+}
+
+/***********/
+
+.login-form form span::before {
+    display: inline;
+    content: "⚠ ";
+  }
+
+.error {
+    color: red;
+}
