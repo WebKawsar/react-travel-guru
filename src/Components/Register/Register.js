@@ -10,7 +10,7 @@ import "./Register.css";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 
 
@@ -20,30 +20,38 @@ const Register = () => {
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
+
+    let history = useHistory();
+    let location = useLocation();
+    const { from } = location.state || { from: { pathname: "/" } };
+
+
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
 
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         .then(response => {
 
-            const newUserInfo = {
-                name: data.name,
-                email: data.email,
-                password: data.password,
-                success: true,
-                error: false
-            }
-            
+            const newUserInfo = {...loggedInUser};
+            newUserInfo.name = data.firstName + " " + data.lastName;
+            newUserInfo.email = data.email;
+            newUserInfo.password = data.password;
+            newUserInfo.success = true;
+            newUserInfo.error = "";
+
             setLoggedInUser(newUserInfo);
+            // history.push(from);
+            
+
         })
         .catch(error => {
 
-            const newUserInfo = {
-                success: false,
-                error: error.message
-            }
-            
+            const newUserInfo = {...loggedInUser};
+            newUserInfo.success = false;
+            newUserInfo.error = error.message;
+
             setLoggedInUser(newUserInfo);
+
           });
 
     }
@@ -122,11 +130,7 @@ const Register = () => {
 
     }
 
-    const handleInputFocus = () => {
-        document.getElementById("firstName").style.borderStyle = "none";
-        document.getElementById("firstName").style.borderBottom = "2px solid lightgray";
-    }
-
+    console.log(loggedInUser);
 
     return (
         <Container>
@@ -145,7 +149,7 @@ const Register = () => {
                                 <h3>Create an account</h3>
                                 <form onSubmit={handleSubmit(onSubmit)}>
 
-                                    <input type="text" id="firstName" onFocus={handleInputFocus} name="firstName" ref={register({ required: "First name is required"})} placeholder="First name"/>
+                                    <input type="text" id="firstName" name="firstName" ref={register({ required: "First name is required"})} placeholder="First name"/>
                                     {errors.firstName && <span className="error">{errors.firstName.message}</span>}
 
 

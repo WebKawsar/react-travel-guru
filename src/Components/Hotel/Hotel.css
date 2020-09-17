@@ -6,3 +6,30 @@
 .hotel-info {
     margin: 50px 0;
 }
+
+.room-info span {
+    margin: 0 8px;
+}
+.room-info span:first-child {
+    margin-left: 0;
+}
+
+.ratings-image {
+    width: 25px;
+}
+
+.hotel-details-footer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.hotel-details-footer span {
+    margin: 0 8px;
+}
+
+.hotel-details-footer span:first-child {
+    display: flex;
+    align-items: center;
+}
+

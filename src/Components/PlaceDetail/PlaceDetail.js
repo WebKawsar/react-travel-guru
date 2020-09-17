@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
+import { UserContext } from '../../App';
 import fakePlace from '../../fakeData/fakePlace';
+import Header from '../Header/Header';
 import "./PlaceDetail.css";
 
 
 
 const PlaceDetail = () => {
 
-    const [bookingData, setBookingData] = useState({});
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+    // const [bookingData, setBookingData] = useState({});
     const {place} = useParams();
     const {placeName, shortDestails} = fakePlace.find(tour => tour.placeName === place)
 
@@ -17,6 +21,8 @@ const PlaceDetail = () => {
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => {
         
+        const newData = {...loggedInUser, data};
+        setLoggedInUser(newData);
         history.push(`/booking/${place}`)
 
     }
@@ -26,6 +32,7 @@ const PlaceDetail = () => {
     return (
         <div className="place-details-section">
             <Container>
+                
                 <div className="row">
                     <div className="col-md-6">
                         <div className="details">
@@ -43,6 +50,10 @@ const PlaceDetail = () => {
                                     <option value="dhaka">Dhaka</option>
                                     <option value="sylhet">Sylhet</option>
                                     <option value="rajshahi">Rajshahi</option>
+                                    <option value="khulna">Khulna</option>
+                                    <option value="barishal">Barishal</option>
+                                    <option value="chitagong">Chitagong</option>
+                                    <option value="mymensingh">Mymensingh</option>
                                 </select>
                                 {errors.origin && <p  className="error">{errors.origin.message}</p> }
                                 
@@ -51,8 +62,8 @@ const PlaceDetail = () => {
                                 <select  ref={register({required: "Select destination-" })} name="destination" id="destination">
                                     <option value="">Select Destination</option>
                                     <option value="coxsbazar">Coxs Bazar</option>
-                                    <option value="sreemongol">Sreemongol</option>
-                                    <option value="sundarans">Sundarans</option>
+                                    <option value="sreemangal">Sreemangal</option>
+                                    <option value="sundarbans">Sundarbans</option>
                                 </select>
                                 {errors.destination && <p  className="error">{errors.destination.message}</p> }
                                 

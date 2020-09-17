@@ -10,7 +10,7 @@ const Hotel = (props) => {
     return (
         <div className="hotel-info">
             <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-8">
                     <div className="row">
                         <div className="col-md-5">
                             <img className="hotel-image" src={imgUrl} alt=""/>
@@ -18,16 +18,16 @@ const Hotel = (props) => {
                         <div className="col-md-7">
                             <h6>{hotelName}</h6>
                             <div className="room-info">
-                                <span>4 Guests</span>
-                                <span>2 Bedrooms</span>
-                                <span>2 Beds</span>
-                                <span>2 Baths</span>
+                                <span>{capacity} guests</span>
+                                <span>{bedroom} bedrooms</span>
+                                <span>{bed} beds</span>
+                                <span>{baths} baths</span>
                             </div>
                             <p>{description}</p>
-                            <div className="hotel-info">
-                                <span>4.9 (20)</span>
-                                <span>34.99/night</span>
-                                <span>55.99/total</span>
+                            <div className="hotel-details-footer">
+                                <span><img className="ratings-image" src={starImg} alt=""/> {ratings} ({ratingsPerson})</span>
+                                <span>$ {halfprice}/night</span>
+                                <span>$ {totalPrice}/total</span>
                             </div>
                         </div>
                     </div>

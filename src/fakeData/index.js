@@ -1,10 +1,6 @@
 
 const hotelInfo = [
 
-	
-	
-	
-	
 	{	
 		id: 101,
 		hotelName: 'Rest Inn Hotel Moulvibazar',
@@ -23,8 +19,8 @@ const hotelInfo = [
 	},
 	{	
 		id: 102,
-		hotelName: 'Jungle cottage',
-		description: '   Located in sundarbans, Jungle cottage has free WiFi, and guests can enjoy a restaurant and a garden. Nice place with great location. The staffs were so polite & helpful. will visit again.',
+		hotelName: 'Jungle cottage in Sundarbans',
+		description: 'Located in sundarbans, Jungle cottage has free WiFi, and guests can enjoy a restaurant and a garden. Nice place with great location. The staffs were so polite & helpful. will visit again.',
 		imgUrl: 'https://i.ibb.co/JdYJsH5/hotel-1.jpg',
 		bed: 1,
 		capacity: 2,
@@ -40,7 +36,7 @@ const hotelInfo = [
 	{	
 		id: 103,
 		hotelName: 'Balishira Resort Ltd.',
-		description: 'Located in Sreemangal, Balishira Resort Ltd. Features a terrace. Among the facilities of this property are a restaurant, a 24-hour front desk and room service, along with free WiFi throughout the... Quiet location near tea gardens, outstanding service, super clean facilities, free room upgrade, good food and the most friendliest people ever. Thank you very much for everything.',
+		description: 'Located in Sreemangal, Balishira Resort Ltd. Features a terrace. Among the facilities of this property are a restaurant, a 24-hour front desk and room service, along with free.',
 		imgUrl: 'https://i.ibb.co/NnSKgnd/hotel-2.jpg',
 		bed: 2,
 		capacity: 4,
@@ -72,7 +68,7 @@ const hotelInfo = [
 	{	
 		id: 105,
 		hotelName: 'Hotel Skypark in Sreemangal',
-		description: 'Located in Sreemangal, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floor garden was awesome place. Well service. Great staff',
+		description: 'Located in Sreemangal, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floor.',
 		imgUrl: 'https://i.ibb.co/684MBLt/hotel-4.jpg',
 		bed: 4,
 		capacity: 8,
@@ -87,7 +83,7 @@ const hotelInfo = [
 	},
 	{	
 		id: 106,
-		hotelName: 'Hotel Paradise Sreemangal',
+		hotelName: 'Hotel Paradise in Sreemangal',
 		description: 'Located in Sreemangal, Hotel Paradise Sreemangal offers a garden. The property has a 24-hour front desk, airport transportation, room service and free WiFi.',
 		imgUrl: 'https://i.ibb.co/5KH9xsZ/hotel-5.jpg',
 		bed: 1,
@@ -103,7 +99,7 @@ const hotelInfo = [
 	},
 	{	
 		id: 107,
-		hotelName: 'Hotel Paradise Sundarbans',
+		hotelName: 'Hotel Paradise in Sundarbans',
 		description: 'Located in Sundarbans, Hotel Paradise Sreemangal offers a garden. The property has a 24-hour front desk, airport transportation, room service and free WiFi.',
 		imgUrl: 'https://i.ibb.co/NnSKgnd/hotel-2.jpg',
 		bed: 2,
@@ -119,7 +115,7 @@ const hotelInfo = [
 	},
 	{	
 		id: 108,
-		hotelName: 'Hotel Paradise Coxs Bazar',
+		hotelName: 'Hotel Paradise in Coxs Bazar',
 		description: 'Located in Coxs Bazar, Hotel Paradise Coxs Bazar offers a garden. The property has a 24-hour front desk, airport transportation, room service and free WiFi.',
 		imgUrl: 'https://i.ibb.co/vBRY2Dr/Rectangle-26.png',
 		bed: 1,
@@ -152,7 +148,7 @@ const hotelInfo = [
 	{	
 		id: 110,
 		hotelName: 'Hotel Skypark in Coxs Bazar',
-		description: 'Located in Coxs Bazar, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floor garden was awesome place. Well service. Great staff.',
+		description: 'Located in Coxs Bazar, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floo.',
 		imgUrl: 'https://i.ibb.co/MGp5jNm/Rectangle-28.png',
 		bed: 3,
 		capacity: 6,
@@ -168,7 +164,7 @@ const hotelInfo = [
 	{	
 		id: 111,
 		hotelName: 'Hotel Skypark in Sundarbans',
-		description: 'Located in Sundarbans, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floor garden was awesome place. Well service. Great staff.',
+		description: 'Located in Sundarbans, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floor garden.',
 		imgUrl: 'https://i.ibb.co/MGp5jNm/Rectangle-28.png',
 		bed: 2,
 		capacity: 4,
@@ -184,7 +180,7 @@ const hotelInfo = [
 	{	
 		id: 112,
 		hotelName: 'Hotel Skypark in Sundarbans',
-		description: 'Located in Sundarbans, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floor garden was awesome place. Well service. Great staff.',
+		description: 'Located in Sundarbans, Hotel Skypark features a garden. Among the facilities at this property are a 24-hour front desk and a shared kitchen, along with free WiFi throughout the property. Their top floor.',
 		imgUrl: 'https://i.ibb.co/5KH9xsZ/hotel-5.jpg',
 		bed: 2,
 		capacity: 4,

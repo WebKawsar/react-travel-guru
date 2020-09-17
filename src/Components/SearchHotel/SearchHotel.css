@@ -1,0 +1,10 @@
+hr {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid lightgray;
+}
+
+.user-info h5 {
+    margin: 10px 0;
+}

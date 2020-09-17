@@ -32,16 +32,16 @@ const Login = () => {
         firebase.auth().signInWithEmailAndPassword(data.email, data.password)
         .then(response => {
            
-            const signInWithEmailAndPass = {
+            const signInWithEmailAndPass = {...loggedInUser};
+            
+            signInWithEmailAndPass.email = data.email;
+            signInWithEmailAndPass.password = data.password;
+            signInWithEmailAndPass.success = true;
+            signInWithEmailAndPass.error = "";
 
-                email: data.email,
-                password: data.password,
-                success: true,
-                error: ""
-
-            }
             setLoggedInUser(signInWithEmailAndPass);
             history.replace(from);
+
           })
           .catch(error => {
 
@@ -58,24 +58,27 @@ const Login = () => {
 
     }
 
+
+
+
     const handleFacebookSignIn = () => {
 
         const fbProvider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().signInWithPopup(fbProvider)
         .then(response => {
-           
+
             const {displayName, email, photoURL} = response.user;
-            const facebookSignInUser = {
+            const facebookSignInUser = {...loggedInUser};
 
-                name: displayName,
-                email: email,
-                img: photoURL,
-                success: true,
-                error: ""
+            facebookSignInUser.name = displayName;
+            facebookSignInUser.email = email;
+            facebookSignInUser.img = photoURL;
+            facebookSignInUser.success = true;
+            facebookSignInUser.error = "";
 
-            }
             setLoggedInUser(facebookSignInUser);
             history.replace(from);
+
           })
           .catch(error => {
 
@@ -92,6 +95,10 @@ const Login = () => {
 
     }
 
+
+
+
+
     const handleGoogleSignIn = () => {
 
         const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -99,17 +106,17 @@ const Login = () => {
         .then(response => {
            
             const {displayName, email, photoURL} = response.user;
-            const googleSignInUser = {
+            const googleSignInUser = {...loggedInUser};
 
-                name: displayName,
-                email: email,
-                img: photoURL,
-                success: true,
-                error: ""
+            googleSignInUser.name = displayName;
+            googleSignInUser.email = email;
+            googleSignInUser.img = photoURL;
+            googleSignInUser.success = true;
+            googleSignInUser.error = "";
 
-            }
             setLoggedInUser(googleSignInUser);
             history.replace(from);
+            
           })
           .catch(error => {
 
