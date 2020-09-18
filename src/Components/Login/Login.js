@@ -1,137 +1,133 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Header from '../Header/Header';
 import "./Login.css";
 import googleIcon from "../../travel-guru-resources/Icon/google.png";
 import faIcon from "../../travel-guru-resources/Icon/fb.png";
-
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import firebaseConfig from '../Firebase/firebase.config';
 import { UserContext } from '../../App';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import { facebookSignIn, initializeFirebaseFramework, googleSignIn, handleLoginSystem, handleRegisterSystem } from '../Firebase/Firebase';
 
 
 
-
-firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
 
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    initializeFirebaseFramework();
 
-    let history = useHistory();
-    let location = useLocation();
+    const [newUser, setNewUser] = useState(false);
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const history = useHistory();
+    const location = useLocation();
     const { from } = location.state || { from: { pathname: "/" } };
 
+    const handleResponse = (response, redirect) => {
 
-    const { register, handleSubmit, errors } = useForm();
+        
+        const userInfo = {...loggedInUser, response};
+        setLoggedInUser(userInfo);
+
+        if(redirect){
+            history.replace(from);
+        }
+
+    }
+
+
+
+    const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
 
-        firebase.auth().signInWithEmailAndPassword(data.email, data.password)
-        .then(response => {
-           
-            const signInWithEmailAndPass = {...loggedInUser};
+        // register system fro new user
+        if(newUser){
+
+            handleRegisterSystem(data)
+            .then(response => {
+
+                    if(response.success && response.email){
+    
+                        handleResponse(response, true);
+                    }
+                    else{
+                
+                        handleResponse(response, false);
+                    }
+                    
+            })
+        
+        }
+        if(!newUser){
+
+            handleLoginSystem(data.email, data.password)
+            .then(response => {
+                
+                if(response.success && response.email){
+    
+                    handleResponse(response, true);
+                }
+                else{
             
-            signInWithEmailAndPass.email = data.email;
-            signInWithEmailAndPass.password = data.password;
-            signInWithEmailAndPass.success = true;
-            signInWithEmailAndPass.error = "";
+                    handleResponse(response, false);
+                }
+    
+            })
 
-            setLoggedInUser(signInWithEmailAndPass);
-            history.replace(from);
 
-          })
-          .catch(error => {
+        }
 
-            const errorMessage = error.message;
-            const signInError = {
-
-                success: false,
-                error: errorMessage
-
-            }
-            setLoggedInUser(signInError);
-            
-          });
 
     }
 
 
 
+    console.log(loggedInUser);
 
+    
     const handleFacebookSignIn = () => {
-
-        const fbProvider = new firebase.auth.FacebookAuthProvider();
-        firebase.auth().signInWithPopup(fbProvider)
+        
+        facebookSignIn()
         .then(response => {
+            
+            if(response.success && response.email){
 
-            const {displayName, email, photoURL} = response.user;
-            const facebookSignInUser = {...loggedInUser};
-
-            facebookSignInUser.name = displayName;
-            facebookSignInUser.email = email;
-            facebookSignInUser.img = photoURL;
-            facebookSignInUser.success = true;
-            facebookSignInUser.error = "";
-
-            setLoggedInUser(facebookSignInUser);
-            history.replace(from);
-
-          })
-          .catch(error => {
-
-            const errorMessage = error.message;
-            const facebookSignError = {
-
-                success: false,
-                error: errorMessage
-
+                handleResponse(response, true);
             }
-            setLoggedInUser(facebookSignError);
-            history.replace(from);
-          });
+            else{
+        
+                handleResponse(response, false);
+            }
+
+        })
 
     }
-
-
-
 
 
     const handleGoogleSignIn = () => {
-
-        const googleProvider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(googleProvider)
+        
+        googleSignIn()
         .then(response => {
-           
-            const {displayName, email, photoURL} = response.user;
-            const googleSignInUser = {...loggedInUser};
 
-            googleSignInUser.name = displayName;
-            googleSignInUser.email = email;
-            googleSignInUser.img = photoURL;
-            googleSignInUser.success = true;
-            googleSignInUser.error = "";
+            if(response.success && response.email){
 
-            setLoggedInUser(googleSignInUser);
-            history.replace(from);
-            
-          })
-          .catch(error => {
-
-            const errorMessage = error.message;
-            const googleSignError = {
-
-                success: false,
-                error: errorMessage
-
+                handleResponse(response, true);
+              }
+              else{
+        
+                handleResponse(response, false);
             }
-            setLoggedInUser(googleSignError);
-            
-          });
+
+        })
 
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -143,43 +139,85 @@ const Login = () => {
                 <div className="login-system">
                     <div className="row">
                         <div className="col-md-6 offset-md-3">
-                            {
-                                loggedInUser.success && <p style={{color: "green", textAlign: "center", fontSize: "20px"}}>You have successfully Sign in</p>
-                            }
+
                             {
                                 loggedInUser.error && <p style={{color: "red", textAlign: "center", fontSize: "20px"}}>{loggedInUser.error}</p>
                             }
-                            <div className="login-form">
+
+
+{
+    newUser ? <div className="register-form">
+    <h3>Create an account</h3>
+    <form onSubmit={handleSubmit(onSubmit)}>
+
+        <input type="text" id="firstName" name="firstName" ref={register({ required: "First name is required"})} placeholder="First name"/>
+        {errors.firstName && <span className="error">{errors.firstName.message}</span>}
+
+
+        <input type="text" name="lastName" ref={register({ required: "Last name is required"})} placeholder="Last name"/>
+        {errors.lastName && <span className="error">{errors.lastName.message}</span>}
+
+
+        <input type="email" name="email" ref={register({ 
+            required: "Email field is required",
+            pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Please provide valid email address"
+            }
+            })} placeholder="Email address"/>
+        {errors.email && <span className="error">{errors.email.message}</span>}
+
+        <input type="password" name="password" ref={register({
+            required: "Password field is required",
+            minLength: {
+                value: 6,
+                message: "Password containing at least 8 characters"
+            },
+            pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                message: "Password containing characters, number, upper and lowercase"
+            }
+            })} placeholder="Password"/>
+        {errors.password && <span className="error">{errors.password.message}</span>}
+
+        <input type="password" name="rePassword" ref={register({
+            required: "Confirm password field is required",
+            validate: (value) => value === watch("password") || "Passwords do not match"
+        })} placeholder="Confirm password"/>
+        {errors.rePassword && <span className="error">{errors.rePassword.message}</span>}
+
+
+
+        <input type="submit" value="Create an account" />
+    </form>
+
+    <span onClick={() => setNewUser(!newUser)}>Already have an account?Login</span> 
+</div> : <div className="login-form">
                                 <h3>Login</h3>
                                 <form onSubmit={handleSubmit(onSubmit)}>
 
 
-                                <input type="email" name="email" ref={register({ 
-                                    required: "Email field is required",
-                                    pattern: {
-                                        value: /\S+@\S+\.\S+/,
-                                        message: "Please provide valid email address"
-                                    }
+                                    <input type="email" name="email" ref={register({ 
+                                        required: "Email field is required",
+                                        pattern: {
+                                            value: /\S+@\S+\.\S+/,
+                                            message: "Please provide valid email address"
+                                        }
                                     })} placeholder="Your email"/>
-                                {errors.email && <span className="error">{errors.email.message}</span>}
+                                    {errors.email && <span className="error">{errors.email.message}</span>}
 
-                                <input type="password" name="password" ref={register({
-                                    required: "Password field is required",
-                                    minLength: {
-                                        value: 6,
-                                        message: "Password containing at least 8 characters"
-                                    },
-                                    pattern: {
-                                        value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
-                                        message: "Password containing characters, number, upper and lowercase"
-                                    }
+                                    <input type="password" name="password" ref={register({
+                                        required: "Password field is required",
+                                        minLength: {
+                                            value: 6,
+                                            message: "Password containing at least 8 characters"
+                                        },
+                                        pattern: {
+                                            value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                                            message: "Password containing characters, number, upper and lowercase"
+                                        }
                                      })} placeholder="Your password"/>
-                                {errors.password && <span className="error">{errors.password.message}</span>}
-
-                                    
-                                    {/* <input type="email" name="email" id="email" placeholder="Username or Email"/> */}
-
-                                    {/* <input type="password" name="password" id="password" placeholder="Password"/> */}
+                                    {errors.password && <span className="error">{errors.password.message}</span>}
 
                                     <div className="inine-input">
                                         <label htmlFor="checkbox"><input type="checkbox" name="checkbox" id="checkbox"/> Remember me</label>
@@ -190,8 +228,14 @@ const Login = () => {
                                     <input type="submit" value="Log in"/>
                                 </form>
 
-                                <span>Don't have an account? <Link to="/register">Create an account</Link></span> 
+                                <span onClick={() => setNewUser(!newUser)}>Don't have an account? Create an account</span> 
                             </div>
+}
+
+
+
+
+                            
                         </div>
                     </div>
                     <div className="row">

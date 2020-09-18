@@ -16,9 +16,7 @@ export const UserContext = createContext();
 
 function App() {
 
-  const [loggedInUser, setLoggedInUser] = useState({
-    success: false
-  });
+  const [loggedInUser, setLoggedInUser] = useState({});
 
 
   return (

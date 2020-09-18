@@ -10,7 +10,7 @@ const PrivateRoute = ({children, ...rest}) => {
             <Route
             {...rest}
             render={({ location }) =>
-                loggedInUser.success ? (
+                loggedInUser.response ? (
                 children
                 ) : (
                 <Redirect
