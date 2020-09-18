@@ -22,20 +22,6 @@ const Login = () => {
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/" } };
 
-    const handleResponse = (response, redirect) => {
-
-        
-        const userInfo = {...loggedInUser, response};
-        setLoggedInUser(userInfo);
-
-        if(redirect){
-            history.replace(from);
-        }
-
-    }
-
-
-
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
 
@@ -178,16 +164,6 @@ const Login = () => {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     return (
         <Container>
             <div className="login-section">
@@ -199,7 +175,6 @@ const Login = () => {
                             {
                                 loggedInUser.error && <p style={{color: "red", textAlign: "center", fontSize: "20px"}}>{loggedInUser.error}</p>
                             }
-
 
                             {
                                 newUser 
@@ -291,10 +266,6 @@ const Login = () => {
                                     </div>
                             }
 
-
-
-
-                            
                         </div>
                     </div>
                     <div className="row">

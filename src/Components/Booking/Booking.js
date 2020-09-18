@@ -1,19 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { Container } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
 import fakePlace from '../../fakeData/fakePlace';
-import Header from '../Header/Header';
-import "./PlaceDetail.css";
+import "./Booking.css";
 
 
 
-const PlaceDetail = () => {
+const Booking = () => {
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
-    // const [bookingData, setBookingData] = useState({});
+
     const {place} = useParams();
     const {placeName, shortDestails} = fakePlace.find(tour => tour.placeName === place)
 
@@ -90,4 +89,4 @@ const PlaceDetail = () => {
     );
 };
 
-export default PlaceDetail;
+export default Booking;

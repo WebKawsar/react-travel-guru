@@ -11,27 +11,15 @@ import "./SearchHotel.css";
 
 const SearchHotel = () => {
 
-    const {place} = useParams();
     const [hotelList, setHotelList] = useState([]);
-
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-
-
 
     useEffect(() => {
 
-        const filterValue = fakeData.filter(hotel => hotel.place === place)
+        const filterValue = fakeData.filter(hotel => hotel.place === loggedInUser.bookingData.destination)
         setHotelList(filterValue);
 
     }, [])
-
-
-
-    console.log(" loggedInUser",loggedInUser);
-
-    console.log(" hotelList",hotelList);
-
-
 
     return (
         <Container>

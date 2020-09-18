@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
-import PlaceDetail from './Components/PlaceDetail/PlaceDetail';
 import SearchHotel from './Components/SearchHotel/SearchHotel';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Booking from './Components/Booking/Booking';
 
 
 export const UserContext = createContext();
@@ -35,7 +35,7 @@ function App() {
           </Route>
 
           <Route path="/tour/:place">
-            <PlaceDetail></PlaceDetail>
+            <Booking></Booking>
           </Route>
 
           <PrivateRoute path="/booking/:place">
