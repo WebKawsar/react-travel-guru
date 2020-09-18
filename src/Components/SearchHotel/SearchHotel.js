@@ -39,12 +39,12 @@ const SearchHotel = () => {
             <hr/>
 
                 {
-                    loggedInUser.data && 
+                    loggedInUser.bookingData && 
                     <div className="user-info">
                         <br/>
-                        <span>{loggedInUser.response.name} guest at {loggedInUser.data.from} to {loggedInUser.data.to}</span>
-                        <h5>Stays in {loggedInUser.data.destination.toUpperCase()} </h5>
-                        <p>Available Hotels ({hotelList.length}) are beside in {loggedInUser.data.destination.toUpperCase()}</p>
+                        <span>{loggedInUser.name} guest at {loggedInUser.bookingData.from} to {loggedInUser.bookingData.to}</span>
+                        <h5>Stays in {loggedInUser.bookingData.destination.toUpperCase()} </h5>
+                        <p>Available Hotels ({hotelList.length}) are beside in {loggedInUser.bookingData.destination.toUpperCase()}</p>
                     </div>
                 }
 

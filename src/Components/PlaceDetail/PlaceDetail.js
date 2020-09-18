@@ -19,9 +19,9 @@ const PlaceDetail = () => {
 
     const history = useHistory();
     const { register, handleSubmit, errors } = useForm();
-    const onSubmit = data => {
+    const onSubmit = bookingData => {
         
-        const newData = {...loggedInUser, data};
+        const newData = {...loggedInUser, bookingData};
         setLoggedInUser(newData);
         history.push(`/booking/${place}`)
 

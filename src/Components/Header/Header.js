@@ -52,7 +52,7 @@ const Header = () => {
                             <li><Link to="/home">Contact</Link></li>
                             
                             {
-                                loggedInUser.response ? <li><Link onClick={handleLogOut}  className="login" to="/logout">Logout</Link></li> : <li><Link className="login" to="/login">Login</Link></li>
+                                loggedInUser.email ? <li><Link onClick={handleLogOut}  className="login" to="/logout">Logout</Link></li> : <li><Link className="login" to="/login">Login</Link></li>
                             }
                             
                         </ul>

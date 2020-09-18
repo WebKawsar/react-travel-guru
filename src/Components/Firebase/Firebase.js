@@ -1,8 +1,5 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
-import { useContext } from "react";
-import { useHistory, useLocation } from "react-router-dom";
-import { UserContext } from "../../App";
 import firebaseConfig from "./firebase.config";
 
 
@@ -25,8 +22,6 @@ export const handleLoginSystem = (email, password) => {
         
         const signInWithEmailAndPassword = {
 
-            email: email,
-            password: password,
             success: true,
             error: ""
 
@@ -34,9 +29,8 @@ export const handleLoginSystem = (email, password) => {
 
         return signInWithEmailAndPassword;
 
-
-        })
-        .catch(error => {
+    })
+    .catch(error => {
 
         const signInWithEmailAndPasswordError = {
 
@@ -45,8 +39,8 @@ export const handleLoginSystem = (email, password) => {
         };
 
         return signInWithEmailAndPasswordError;
-            
-        });
+        
+    });
 
 }
 
@@ -60,9 +54,6 @@ export const handleRegisterSystem = (data) => {
         const newUserInfo = {
 
             success: true,
-            name: data.firstName + " " + data.lastName,
-            password: data.password,
-            email: data.email,
             error: ""
         }
 

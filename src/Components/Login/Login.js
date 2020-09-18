@@ -45,14 +45,30 @@ const Login = () => {
             handleRegisterSystem(data)
             .then(response => {
 
-                    if(response.success && response.email){
-    
-                        handleResponse(response, true);
-                    }
-                    else{
-                
-                        handleResponse(response, false);
-                    }
+                if(response.success){
+                    
+                    const registerUserInfo = {...loggedInUser}
+                    registerUserInfo.name = data.firstName + " " + data.lastName;
+                    registerUserInfo.email = data.email;
+                    registerUserInfo.password = data.password;
+                    registerUserInfo.success = true;
+                    registerUserInfo.error = "";
+
+                    setLoggedInUser(registerUserInfo);
+                    history.replace(from);
+
+                }
+                else{
+
+                    const registerUserInfoError = {...loggedInUser}
+                    registerUserInfoError.success = false;
+                    registerUserInfoError.error = response.error;
+
+                    setLoggedInUser(registerUserInfoError);
+
+                }
+
+
                     
             })
         
@@ -62,13 +78,27 @@ const Login = () => {
             handleLoginSystem(data.email, data.password)
             .then(response => {
                 
-                if(response.success && response.email){
-    
-                    handleResponse(response, true);
+                
+                if(response.success){
+                    
+                    const loginUserInfo = {...loggedInUser}
+                    loginUserInfo.email = data.email;
+                    loginUserInfo.password = data.password;
+                    loginUserInfo.success = true;
+                    loginUserInfo.error = "";
+
+                    setLoggedInUser(loginUserInfo);
+                    history.replace(from);
+
                 }
                 else{
-            
-                    handleResponse(response, false);
+
+                    const loginUserInfoError = {...loggedInUser}
+                    loginUserInfoError.success = false;
+                    loginUserInfoError.error = response.error;
+
+                    setLoggedInUser(loginUserInfoError);
+
                 }
     
             })
@@ -91,12 +121,24 @@ const Login = () => {
             
             if(response.success && response.email){
 
-                handleResponse(response, true);
+                
+                const facebookSignInUser = {...loggedInUser}
+                facebookSignInUser.name = response.name;
+                facebookSignInUser.email = response.email;
+                facebookSignInUser.img = response.img;
+                facebookSignInUser.success = true;
+                facebookSignInUser.error = "";
+                setLoggedInUser(facebookSignInUser);
+                history.replace(from);
             }
             else{
         
-                handleResponse(response, false);
-            }
+
+                const facebookSignInUserError = {...loggedInUser}
+                facebookSignInUserError.success = false;
+                facebookSignInUserError.error = response.error;
+
+                setLoggedInUser(facebookSignInUserError);            }
 
         })
 
@@ -110,11 +152,25 @@ const Login = () => {
 
             if(response.success && response.email){
 
-                handleResponse(response, true);
+
+                const googleSignInUser = {...loggedInUser}
+                googleSignInUser.name = response.name;
+                googleSignInUser.email = response.email;
+                googleSignInUser.img = response.img;
+                googleSignInUser.success = true;
+                googleSignInUser.error = "";
+                setLoggedInUser(googleSignInUser);
+                history.replace(from);
+
               }
               else{
         
-                handleResponse(response, false);
+
+                const googleSignInError = {...loggedInUser}
+                googleSignInError.success = false;
+                googleSignInError.error = response.error;
+
+                setLoggedInUser(googleSignInError);  
             }
 
         })
@@ -145,56 +201,18 @@ const Login = () => {
                             }
 
 
-{
-    newUser ? <div className="register-form">
-    <h3>Create an account</h3>
-    <form onSubmit={handleSubmit(onSubmit)}>
-
-        <input type="text" id="firstName" name="firstName" ref={register({ required: "First name is required"})} placeholder="First name"/>
-        {errors.firstName && <span className="error">{errors.firstName.message}</span>}
-
-
-        <input type="text" name="lastName" ref={register({ required: "Last name is required"})} placeholder="Last name"/>
-        {errors.lastName && <span className="error">{errors.lastName.message}</span>}
-
-
-        <input type="email" name="email" ref={register({ 
-            required: "Email field is required",
-            pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Please provide valid email address"
-            }
-            })} placeholder="Email address"/>
-        {errors.email && <span className="error">{errors.email.message}</span>}
-
-        <input type="password" name="password" ref={register({
-            required: "Password field is required",
-            minLength: {
-                value: 6,
-                message: "Password containing at least 8 characters"
-            },
-            pattern: {
-                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
-                message: "Password containing characters, number, upper and lowercase"
-            }
-            })} placeholder="Password"/>
-        {errors.password && <span className="error">{errors.password.message}</span>}
-
-        <input type="password" name="rePassword" ref={register({
-            required: "Confirm password field is required",
-            validate: (value) => value === watch("password") || "Passwords do not match"
-        })} placeholder="Confirm password"/>
-        {errors.rePassword && <span className="error">{errors.rePassword.message}</span>}
-
-
-
-        <input type="submit" value="Create an account" />
-    </form>
-
-    <span onClick={() => setNewUser(!newUser)}>Already have an account?Login</span> 
-</div> : <div className="login-form">
-                                <h3>Login</h3>
+                            {
+                                newUser 
+                                ? <div className="register-form">
+                                <h3>Create an account</h3>
                                 <form onSubmit={handleSubmit(onSubmit)}>
+
+                                    <input type="text" id="firstName" name="firstName" ref={register({ required: "First name is required"})} placeholder="First name"/>
+                                    {errors.firstName && <span className="error">{errors.firstName.message}</span>}
+
+
+                                    <input type="text" name="lastName" ref={register({ required: "Last name is required"})} placeholder="Last name"/>
+                                    {errors.lastName && <span className="error">{errors.lastName.message}</span>}
 
 
                                     <input type="email" name="email" ref={register({ 
@@ -203,7 +221,7 @@ const Login = () => {
                                             value: /\S+@\S+\.\S+/,
                                             message: "Please provide valid email address"
                                         }
-                                    })} placeholder="Your email"/>
+                                        })} placeholder="Email address"/>
                                     {errors.email && <span className="error">{errors.email.message}</span>}
 
                                     <input type="password" name="password" ref={register({
@@ -216,21 +234,62 @@ const Login = () => {
                                             value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
                                             message: "Password containing characters, number, upper and lowercase"
                                         }
-                                     })} placeholder="Your password"/>
+                                        })} placeholder="Password"/>
                                     {errors.password && <span className="error">{errors.password.message}</span>}
 
-                                    <div className="inine-input">
-                                        <label htmlFor="checkbox"><input type="checkbox" name="checkbox" id="checkbox"/> Remember me</label>
-                                        <Link className="forgot-pass" to="/login">Forgot password</Link>
-                                        
-                                    </div>
+                                    <input type="password" name="rePassword" ref={register({
+                                        required: "Confirm password field is required",
+                                        validate: (value) => value === watch("password") || "Passwords do not match"
+                                    })} placeholder="Confirm password"/>
+                                    {errors.rePassword && <span className="error">{errors.rePassword.message}</span>}
 
-                                    <input type="submit" value="Log in"/>
+
+
+                                    <input type="submit" value="Create an account" />
                                 </form>
 
-                                <span onClick={() => setNewUser(!newUser)}>Don't have an account? Create an account</span> 
-                            </div>
-}
+                                <span className="toogle" onClick={() => setNewUser(!newUser)}>Already have an account?Login</span> 
+                                </div> 
+
+                                :   <div className="login-form">
+                                        <h3>Login</h3>
+                                        <form onSubmit={handleSubmit(onSubmit)}>
+
+
+                                            <input type="email" name="email" ref={register({ 
+                                                required: "Email field is required",
+                                                pattern: {
+                                                    value: /\S+@\S+\.\S+/,
+                                                    message: "Please provide valid email address"
+                                                }
+                                            })} placeholder="Your email"/>
+                                            {errors.email && <span className="error">{errors.email.message}</span>}
+
+                                            <input type="password" name="password" ref={register({
+                                                required: "Password field is required",
+                                                minLength: {
+                                                    value: 6,
+                                                    message: "Password containing at least 8 characters"
+                                                },
+                                                pattern: {
+                                                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/,
+                                                    message: "Password containing characters, number, upper and lowercase"
+                                                }
+                                                })} placeholder="Your password"/>
+                                            {errors.password && <span className="error">{errors.password.message}</span>}
+
+                                            <div className="inine-input">
+                                                <label htmlFor="checkbox"><input type="checkbox" name="checkbox" id="checkbox"/> Remember me</label>
+                                                <Link className="forgot-pass" to="/login">Forgot password</Link>
+                                                
+                                            </div>
+
+                                            <input type="submit" value="Log in"/>
+                                        </form>
+
+                                        <span className="toogle" onClick={() => setNewUser(!newUser)}>Don't have an account? Create an account</span> 
+                                    </div>
+                            }
 
 
 
