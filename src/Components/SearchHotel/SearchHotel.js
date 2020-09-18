@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
 import fakeData from '../../fakeData';
 import Header from '../Header/Header';

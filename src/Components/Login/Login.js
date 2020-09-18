@@ -95,10 +95,6 @@ const Login = () => {
 
     }
 
-
-
-    console.log(loggedInUser);
-
     
     const handleFacebookSignIn = () => {
         

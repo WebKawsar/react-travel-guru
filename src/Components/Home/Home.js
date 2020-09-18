@@ -7,8 +7,6 @@ import TourPlace from '../TourPlace/TourPlace';
 
 
 
-
-
 const Home = () => {
 
     const [places, setPlaces] = useState(fakePlace)
